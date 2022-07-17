@@ -14,17 +14,7 @@ In order to build the docker images there are some required environment variable
 
 To setup the variables just use the convention for cloudinary, maail_trap and mongodb:config projects:
 
-```
-.env                # loaded in all cases
 
- Below the required env variables:
-
-
-PORT =4000
-DB_URL=mongodb://127.0.0.1:27017/ecomstore
-JWT_SECRET =thisismyjwtsecret
-JWT_EXPIRY =3d
-COOKIE_TIME=3
 
 
 
