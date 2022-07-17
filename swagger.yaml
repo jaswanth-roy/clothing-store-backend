@@ -1,0 +1,542 @@
+openapi: 3.0.1
+info:
+  title: ecommerce store api 
+  description: create API for ecommerce app 
+  version: 1.1.0
+  contact:
+    email: roysvinod@gmail.com
+    url: "https://roy.data"
+
+# servers:
+# - url: "https://localhost:4000/api/v1"
+#   description: for local host - secure
+# - url: "http://localhost:4000/api/v1"
+#   description: for local host - regular
+
+servers:
+  - url: "{protocol}://localhost:4000/api/{version}"
+    description: for local host - secure
+    variables:
+      version:
+        enum:
+          - v1
+          - v2
+        default: v1
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+    BearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /dummy:
+    get:
+      tags:
+        - Home
+      summary: retun greet from kasi
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "my string"
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /signup:
+    post:
+      tags:
+        - user
+      summary: register the users in to mongo db 
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                photo:
+                  type: string
+
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: boolean
+
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /login:
+    post:
+      tags:
+        - user
+      summary: login the users in to mongo db 
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /logout:
+    get:
+      tags:
+        - user
+      summary: logout the users in to mongo db 
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                
+                properties:
+                  email:
+                    type: string
+                  password:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /forgotPassword:
+    post:
+      tags:
+        - user
+      summary: forgot password for the user route
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /password/reset/:token:
+    post:
+      tags:
+        - user
+      summary: reset password for the user route
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                passwordConfirmation:
+                  type: string
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /userdashboard:
+    get:
+      tags:
+        - user
+      summary: get the user dashboard
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                  email:
+                    type: string
+                  password:
+                    type: string
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /changePassword:
+    post:
+      tags:
+        - user
+      summary: change password for the user route
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                currentPassword:
+                  type: string
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  /updateUser:
+    post:
+      tags:
+        - user
+      summary: update the user details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                  email:
+                    type: string
+                  password:
+                    type: string
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  
+  /admin/users:
+    get:
+      tags:
+        - admin
+      summary: get all the users
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      responses:
+        200:
+          description: to get all users who are presenting in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                 
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+
+
+  /admin/user/{id}:
+    get:
+      tags:
+        - admin
+      summary: get the single user details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+       
+      parameters:
+
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: successfully get the  user details based on the id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                id:
+                  type: string
+                  
+                  
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+          
+#put request for updating the user details
+    put:
+      tags:
+        - admin
+      summary: update the user details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+
+        - in: formData
+          name: name
+          schema:
+            type: string
+          required: true
+          description:  name of the user
+        
+       
+        - in: formData
+          name: email
+          schema:
+            type: string
+          required: true
+          description:  email of the user to update
+        - in: formData
+          name: role
+          schema:
+            type: string
+          required: true
+          description:  defind the role 
+      responses:
+        200:
+          description: successfully update the  user details based on the id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                id:
+                  type: string
+                  
+                  
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+
+  
+  
+  
+    delete:
+      tags:
+        - admin
+      summary: delete the user details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+        - in: path
+          name: Id
+          schema:
+            type: string
+          required: true
+          description:  ID of the user to delete
+        - in: formData
+          name: name
+          schema:
+            type: string
+          required: true
+          description:  name of the user to delete  
+        - in: formData
+          name: email
+          schema:
+            type: string
+          required: true
+          description:  email of the user to delete
+
+      
+      responses:
+        200:
+          description: successfully delete the  user details based on the id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                id:
+                  type: string
+                  
+                  
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+
+
+    
+    
+  /manager/users:
+    get:
+      tags:
+        - manager
+      summary: get all the users based on mangaer log in 
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      responses:
+        200:
+          description: to get all users who are presenting in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  users:
+                    - id: 5e9f8f8f8f8f8f8f8f8f8f8
+                      name: test
+                      email:
+                      password: string
+                      createdAt: 2020-01-01T00:00:00.000Z
+                      updatedAt: 2020-01-01T00:00:00.000Z
+                  total: 1
+                properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                  
+                 
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+  
