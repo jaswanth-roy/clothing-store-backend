@@ -17,10 +17,9 @@ To setup the variables just use the convention for cloudinary, maail_trap and mo
 ```
 .env                # loaded in all cases
 
+ Below the required env variables:
 
-Below the required env variables:
 
-```
 PORT =4000
 DB_URL=mongodb://127.0.0.1:27017/ecomstore
 JWT_SECRET =thisismyjwtsecret
@@ -33,17 +32,15 @@ SMTP_HOST =smtp.mailtrap.io
 SMTP_PORT =2525
 SMTP_USER =bd02a410855092
 SMTP_PASS =4e011793cc5a5b
-```
+
 
 
 
 ## Available resources
 | Resource| Link        |
 | ------- | ----------- |
-| `APIs (swagger)` |http://localhost:4000/api-docs/ |
-| `localhost` |http://localhost:4000/signup |
-| `docker` |http://localhost:3000/login |
+| `APIs (swagger)`  | http://localhost:4000/api-docs/ |
+| `localhost`  | http://localhost:4000/signup |
+| `docker`  | http://localhost:3000/login |
 
 
-| 
-| 
