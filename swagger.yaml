@@ -539,4 +539,373 @@ paths:
           description: bad request
         500:
           description: internal server error
+# documnentation for product routes 
+
+  /admin/product/add:
+    post:
+      tags:
+        - products
+      summary: add the product details
+      consumes:
+        - application/json:
+        - multipart/form-data:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+        - in: formData
+          name: name
+          schema:
+            type: string
+          required: true
+          description:  name of the product
+        - in: formData
+          name: price
+          schema:
+            type: string
+          required: true
+          description:  price of the product
+        - in: formData
+          name: description
+          schema:
+            type: string
+          required: true
+          description:  description of the product
+        - in: formData
+          name: image
+          schema:
+            type: file
+          required: true
+          description:  image of the product
+        - in: formData
+          name: image_1
+          schema:
+            type: file
+          required: true
+          description:  img of the product
+        
+
+        - in: formData
+          name: category
+          schema:
+            type: string
+          required: true
+          description:  category of the product
+      
+        - in: formData
+          name: brand
+          schema:
+            type: string
+          required: true
+          description:  brand of the product
+   
+                
+                
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+# documnentation for product get all products routes
+  /products:
+    get:
+      tags:
+        - products
+      summary: get all the products
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      responses:
+        200:
+          description: to get all products who are presenting in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                 
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+# documnentation for product get single product routes
+  
+  /product/{id}:
+    get:
+      tags:
+        - products
+      summary: get the single product details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: successfully get the  product details based on the id
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                id:
+                  type: string
+                  
+                  
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+# documnentation admin for product get all products routes
+  /admin/products:
+    get:
+      tags:
+        - products
+      summary: get all admin products
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      responses:
+        200:
+          description: to get all products who are presenting in the database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  
+                 
+                  
+        400:
+          description: bad request
+        500:
+          description: internal server error
+# update the products 
+  /admin/product/{id}:
+    put:
+      tags:
+        - products
+      summary: update the product details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description:  ID of the product to update
+        - in: formData
+          name: name
+          schema:
+            type: string
+          required: true
+          description:  name of the product
+        - in: formData
+          name: price
+          schema:
+            type: string
+          required: true
+          description:  price of the product
+        - in: formData
+          name: description
+          schema:
+            type: string
+          required: true
+          description:  description of the product
+        - in: formData
+          name: image
+          schema:
+            type: file
+          required: true
+          description:  image of the product
+        - in: formData
+          name: image_1
+          schema:
+            type: file
+          required: true
+          description:  img of the product
+        
+
+        - in: formData
+          name: category
+          schema:
+            type: string
+          required: true
+          description:  category of the product
+      
+        - in: formData
+          name: brand
+          schema:
+            type: string
+          required: true
+          description:  brand of the product
+   
+                
+                
+      responses:
+        200:
+          description: All is well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        400:
+          description: bad request
+        500:
+          description: internal server error
+# put the  review the products
+
+  /review:
+    put:
+      tags:
+        - products
+      summary: review the product details
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+      
+        - in: formData
+          name: ratings
+          schema:
+            type: number
+          required: true
+          description:  rating of the product
+# create an orders
+  /order/create:
+    post:
+      tags:
+        - orders
+      summary: create an order
+      consumes:
+        - application/json:
+      produces:
+        - application/json:
+      Authorization:
+        - Bearer <token>
+      parameters:
+        - in: formData
+          name: product_id
+          schema:
+            type: string
+          required: true
+          description:  ID of the product to update
+        - in: formData
+          name: quantity
+          schema:
+            type: number
+          required: true
+          description:  quantity of the product
+        - in: formData
+          name: total
+          schema:
+            type: number
+          required: true
+          description:  total of the product
+        - in: formData
+          name: address
+          schema:
+            type: string
+          required: true
+          description:  address of the product
+        - in: formData
+          name: phone
+          schema:
+            type: string
+          required: true
+          description:  phone of the product
+        - in: formData
+          name: email
+          schema:
+            type: string
+          required: true
+          description:  email of the product
+        - in: formData
+          name: name
+          schema:
+            type: string
+          required: true
+          description:  name of the product
+        - in: formData
+          name: payment_method
+          schema:
+            type: string
+          required: true
+          description:  payment method of the product
+        - in: formData
+          name: payment_status
+          schema:
+            type: string
+          required: true
+          description:  payment status of the product
+        - in: formData
+          name: payment_id
+          schema:
+            type: string
+          required: true
+          description:  payment id of the product
+        - in: formData
+          name: payment_date
+          schema:
+            type: string
+          required: true
+          description:  payment date of the product
+        - in: formData
+          name: payment_amount
+          schema:
+            type: string
+          required: true
+          description:  payment amount of the product
+        
+
+  
+       
+
+
+
+
+
+
+
+
+
   
